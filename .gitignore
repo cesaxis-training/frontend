@@ -4,7 +4,8 @@
 /churchill/node_modules
 /churchill/.pnp
 .pnp.js
-package-lock.json
+/churchill/package-lock.json
+/churchill/.env
 
 # testing
 /churchill/coverage
