@@ -22,11 +22,15 @@ jobs:
 
       # Instalar dependências
       - name: Install dependencies
-        run: npm install
+        run: | 
+          cd churchill
+          npm install
 
       # Executar linting
       - name: Run linting
-        run: npm run lint
+        run: | 
+          cd churchill 
+          npm run lint
 
       # Placeholder para os testes
       - name: Run tests placeholder
