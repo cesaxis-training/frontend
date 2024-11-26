@@ -57,9 +57,21 @@ jobs:
         run: |
           ssh root@188.166.118.113 "mkdir -p /srv/frontend"
 
+             - name: Create .env file
+
+      - name: Create environment variables
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: |
+          ssh root@188.166.118.113 "cat > /srv/frontend/.env << EOL
+          GITHUB_REPOSITORY=${GITHUB_REPOSITORY}
+          GITHUB_SHA=${GITHUB_SHA}
+          EOL"
+
       - name: Docker compose down
         run: |
-          ssh root@188.166.118.113 "cd /srv/frontend && docker compose down"
+          ssh root@188.166.118.113 "cd /srv/frontend && docker compose down || true"
 
       - name: Copy files to Production Server
         run: |
