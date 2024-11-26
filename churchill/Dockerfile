@@ -25,4 +25,4 @@ RUN npm install -g serve
 EXPOSE 3000
 
 # Step 8: Serve the application
-CMD ["serve", "-s", "build", "-l", "3000", "-n", "0.0.0.0"]
+CMD ["serve", "-s", "build", "-l", "tcp://0.0.0.0:3000"]
