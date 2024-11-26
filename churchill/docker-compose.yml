@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   app:
     image: node:20
@@ -5,8 +7,11 @@ services:
       - "3000:3000"
     environment:
       - REACT_APP_API_URL=${REACT_APP_API_URL}
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true # Enable polling for file changes
+      - WATCHPACK_POLLING=true # Another polling option to ensure file watching
     volumes:
-      - .:/app
-      - /app/node_modules
+      - .:/app # Mount the project directory
+      - /app/node_modules # Prevent overwriting of node_modules
     working_dir: /app
-    command: npm start
+    command: bash -c "npm install && npm start"
