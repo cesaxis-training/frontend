@@ -1,17 +1,14 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/churchill/node_modules
-/churchill/.pnp
-.pnp.js
-/churchill/package-lock.json
-/churchill/.env
+node_modules/
+.env
 
 # testing
-/churchill/coverage
+coverage/
 
 # production
-/churchill/build
+build/
 
 # misc
 .DS_Store

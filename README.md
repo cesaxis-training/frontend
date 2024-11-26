@@ -49,7 +49,13 @@ git clone git@github.com:cesaxis-training/frontend.git
 cd frontend
 ```
 
-2. Use Docker Compose for development:
+2. Copy the `.env.example` file to `.env`:
+
+```bash
+cp .env.example .env
+```
+
+3. Use Docker Compose for development:
 
 ```bash
 docker compose up -d
