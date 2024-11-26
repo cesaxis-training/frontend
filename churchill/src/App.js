@@ -6,7 +6,8 @@ const fetchQuotes = async () => {
   if (!response.ok) {
     throw new Error("Failed to fetch quotes");
   }
-  return response.json();
+  const data = await response.json();
+  return data.slice(0, 100);
 };
 
 const addQuote = async (quote) => {
@@ -68,6 +69,7 @@ function App() {
       }
     };
     getQuotes();
+    setQuote(quotes[0]);
   }, []);
 
   return (
