@@ -13,6 +13,9 @@ RUN npm install
 # Step 5: Copy the rest of the application files
 COPY . .
 
+# environment variable
+ENV REACT_APP_API_URL=https://api.cesaxis.pt
+
 # Step 6: Build the React application
 RUN npm run build
 
