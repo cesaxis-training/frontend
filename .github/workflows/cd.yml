@@ -59,7 +59,7 @@ jobs:
 
       - name: Docker compose down
         run: |
-          ssh root@188.166.118.113 "cd /srv/frontend && docker-compose down"
+          ssh root@188.166.118.113 "cd /srv/frontend && docker compose down"
 
       - name: Copy files to Production Server
         run: |
@@ -67,6 +67,6 @@ jobs:
 
       - name: Docker compose up
         run: |
-          ssh root@188.166.118.113 "cd /srv/frontend && docker-compose up -d"
+          ssh root@188.166.118.113 "cd /srv/frontend && docker compose up -d"
 
   
