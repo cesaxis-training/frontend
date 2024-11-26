@@ -55,28 +55,28 @@ jobs:
 
       - name: Deploy to Production Server
         run: |
-          ssh root@188.166.118.113 "mkdir -p /srv/frontend"
+          ssh root@167.99.222.241 "mkdir -p /srv/frontend"
 
       - name: Create environment variables
         env:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}
         run: |
-          ssh root@188.166.118.113 "cat > /srv/frontend/.env << EOL
+          ssh root@167.99.222.241 "cat > /srv/frontend/.env << EOL
           GITHUB_REPOSITORY=${GITHUB_REPOSITORY}
           GITHUB_SHA=${GITHUB_SHA}
           EOL"
 
       - name: Docker compose down
         run: |
-          ssh root@188.166.118.113 "cd /srv/frontend && docker compose down || true"
+          ssh root@167.99.222.241 "cd /srv/frontend && docker compose down || true"
 
       - name: Copy files to Production Server
         run: |
-          scp ./churchill/docker-compose.prod.yml root@188.166.118.113:/srv/frontend/docker-compose.yml
+          scp ./churchill/docker-compose.prod.yml root@167.99.222.241:/srv/frontend/docker-compose.yml
 
       - name: Docker compose up
         run: |
-          ssh root@188.166.118.113 "cd /srv/frontend && docker compose up -d"
+          ssh root@167.99.222.241 "cd /srv/frontend && docker compose up -d"
 
   
