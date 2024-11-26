@@ -4,3 +4,8 @@ services:
     ports:
       - "3000:3000"
     working_dir: /app
+    networks:
+      - cesaxis_network
+networks:
+  cesaxis_network:
+    external: true

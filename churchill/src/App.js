@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FiRefreshCw, FiPlus, FiEdit, FiTrash2 } from 'react-icons/fi';
 
-// Utility function to fetch quotes from the backend
 const fetchQuotes = async () => {
   const response = await fetch(`${process.env.REACT_APP_API_URL}/quotes`);
   if (!response.ok) {
@@ -10,9 +9,53 @@ const fetchQuotes = async () => {
   return response.json();
 };
 
+const addQuote = async (quote) => {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/quotes`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(quote),
+  });
+  if (!response.ok) {
+    throw new Error("Failed to add quote");
+  }
+  return response.json();
+};
+
+const updateQuote = async (id, quote) => {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/quotes/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(quote),
+  });
+  if (!response.ok) {
+    throw new Error("Failed to update quote");
+  }
+  return response.json();
+};
+
+const deleteQuote = async (id) => {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/quotes/${id}`, {
+    method: 'DELETE',
+  });
+  if (!response.ok) {
+    throw new Error("Failed to delete quote");
+  }
+  return response.json();
+};
+
 function App() {
   const [quotes, setQuotes] = useState([]); // State for storing quotes
   const [error, setError] = useState(null); // State for error handling
+  const [quote, setQuote] = useState(quotes[0]);
+
+  const getRandomQuote = () => {
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    setQuote(quotes[randomIndex]);
+  };
 
   // Fetch quotes on component mount
   useEffect(() => {
@@ -41,9 +84,17 @@ function App() {
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col justify-center items-center text-center px-6 py-16">
+        
+        {/* Quote */}
+        <blockquote className="text-xl pb-5 font-semibold italic text-gray-800">
+          <p>{quote?.text}</p>
+          <footer className="mt-4 text-sm font-medium text-gray-500">
+            – {quote?.author}
+          </footer>
+        </blockquote>
         {/* Buttons */}
         <div className="mb-6 flex gap-4">
-          <button className="btn btn-primary flex items-center gap-2">
+          <button className="btn btn-primary flex items-center gap-2" onClick={getRandomQuote}>
             <FiRefreshCw className="text-lg" />
             Random Quote
           </button>
@@ -73,11 +124,11 @@ function App() {
                         </footer>
                       </blockquote>
                       <div className="card-actions justify-end">
-                        <button className="btn btn-outline btn-sm flex items-center gap-1">
+                        <button className="btn btn-outline btn-sm flex items-center gap-1"> 
                           <FiEdit />
                           Edit
                         </button>
-                        <button className="btn btn-outline btn-error btn-sm flex items-center gap-1">
+                        <button className="btn btn-outline btn-error btn-sm flex items-center gap-1" onClick={() => deleteQuote(quote.id)}>
                           <FiTrash2 />
                           Delete
                         </button>
