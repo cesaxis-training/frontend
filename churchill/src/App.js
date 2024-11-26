@@ -28,7 +28,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-base-200 flex flex-col items-center py-16">
+    <div className="min-h-screen bg-base-200 flex flex-col items-center">
       {/* Header */}
       <header className="w-full bg-primary text-primary-content py-4 shadow-lg">
         <div className="container mx-auto flex justify-center items-center">
@@ -40,7 +40,7 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col justify-center items-center text-center px-6">
+      <main className="flex-1 flex flex-col justify-center items-center text-center px-6 py-16">
         {/* Buttons */}
         <div className="mb-6 flex gap-4">
           <button className="btn btn-primary flex items-center gap-2">
