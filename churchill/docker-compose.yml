@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   app:
     image: node:20
@@ -16,8 +14,8 @@ services:
     working_dir: /app
     command: bash -c "npm install && npm start"
     networks:
-      - backend_app_network
+      - cesaxis_network
 
 networks:
-  backend_app_network:
+  cesaxis_network:
     external: true
