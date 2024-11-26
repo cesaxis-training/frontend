@@ -15,3 +15,9 @@ services:
       - /app/node_modules # Prevent overwriting of node_modules
     working_dir: /app
     command: bash -c "npm install && npm start"
+    networks:
+      - backend_app_network
+
+networks:
+  backend_app_network:
+    external: true
