@@ -32,8 +32,7 @@ jobs:
         with:
           push: true
           tags: ghcr.io/${{ github.repository }}:${{ github.sha }}
-          context: ./churchill
-      
+          context: .
 
   deploy:
     runs-on: ubuntu-latest
@@ -44,12 +43,12 @@ jobs:
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY_PROD }}
-        
+
       - name: Add fingerprint to known hosts
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan -H 167.99.222.241 >> ~/.ssh/known_hosts
-        
+
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -73,10 +72,8 @@ jobs:
 
       - name: Copy files to Production Server
         run: |
-          scp ./churchill/docker-compose.prod.yml root@167.99.222.241:/srv/frontend/docker-compose.yml
+          scp ./docker-compose.prod.yml root@167.99.222.241:/srv/frontend/docker-compose.yml
 
       - name: Docker compose up
         run: |
           ssh root@167.99.222.241 "cd /srv/frontend && docker compose up -d"
-
-  
